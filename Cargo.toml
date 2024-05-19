@@ -20,6 +20,3 @@ serde_json = { version = "1.0", optional = true }
 egui_persistence = ["dep:serde"]
 events = ["dep:serde", "dep:serde_json", "dep:crossbeam"]
 serde = ["dep:serde", "egui/serde", "petgraph/serde", "petgraph/serde-1"]
-
-[workspace]
-members = ["examples/*"]

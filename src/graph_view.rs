@@ -103,7 +103,8 @@ where
 
         meta.first_frame = false;
         meta.store_into_ui(ui);
-        ui.ctx().request_repaint();
+        // XC3DS - not needed it looks like, only causes unnecessary repaints
+        // ui.ctx().request_repaint();
 
         resp
     }
