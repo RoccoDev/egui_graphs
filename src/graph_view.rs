@@ -410,7 +410,14 @@ where
         }
 
         ui.input(|i| {
-            let delta = i.zoom_delta();
+            // XC3DS start - use raw scroll delta to allow zooming without holding down Ctrl
+            let mut delta = i.raw_scroll_delta.y;
+            if delta == 0.0 {
+                delta = i.zoom_delta().max(i.raw_scroll_delta.y);
+            } else {
+                delta += 1.0;
+            }
+            // XC3DS end
             if delta == 1. {
                 return;
             }
@@ -425,7 +432,8 @@ where
             return;
         }
 
-        if resp.dragged_by(PointerButton::Middle)
+        // if resp.dragged_by(PointerButton::Middle) - XC3DS
+        if resp.dragged()
             && self.g.dragged_node().is_none()
             && (resp.drag_delta().x.abs() > 0. || resp.drag_delta().y.abs() > 0.)
         {
